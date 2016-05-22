@@ -4,8 +4,7 @@ Print your github / jira / trello tickets in real life!
 ## Purpose
 Over the course of the last few years, I've kept track of my work items by
 writing them on post-it notes, and then putting them on my laptop, monitors,
-etc, and then putting them on a makeshift spindle (2 paperclips) when I was done
-.  
+etc, and then putting them on a makeshift spindle (2 paperclips) when I was done.  
 
 ![](https://scontent-ord1-1.xx.fbcdn.net/t31.0-8/11807631_10206715064810468_2145873783479697970_o.jpg)
 _The past_  
