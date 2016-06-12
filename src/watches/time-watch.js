@@ -5,7 +5,7 @@
 export const timeWatch = {
   name: "Time Watch",
   getTicketObjects: function() {
-    const time = new Date().toLocaleTimeString();
+    const time = (new Date()).toLocaleTimeString();
     return [{
       title: "THE TIME",
       project: "LIFE",
