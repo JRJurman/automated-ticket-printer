@@ -1,0 +1,28 @@
+{
+  "name": "ticket-printer",
+  "version": "0.0.1",
+  "description": "Print your github / jira / trello tickets in real life!",
+  "babel": {
+    "presets": ["es2015"]
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "babel src -o dist/ticket-printer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JRJurman/ticket-printer.git"
+  },
+  "author": "Jesse Jurman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JRJurman/ticket-printer/issues"
+  },
+  "homepage": "https://github.com/JRJurman/ticket-printer#readme",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "github": "^1.1.2"
+  }
+}
