@@ -1,6 +1,9 @@
 # distributable
 dist/*
 
+# compiled tests
+tests/*.js
+
 # Logs
 logs
 *.log
