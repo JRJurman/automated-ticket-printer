@@ -1,10 +1,5 @@
-general:
-  artifacts:
-    - tests/results
-
 test:
   override:
     - npm run test:ci
   post:
-    - mkdir tests/results
-    - mv test-results.xml tests/results/test-results.xml
+    - mv test-results.xml $CIRCLE_TEST_REPORTS/test-results.xml
