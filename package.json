@@ -8,9 +8,9 @@
     ]
   },
   "scripts": {
+    "prepublish": "npm run build",
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "babel src -o dist/ticket-printer.js",
-    "pretest": "babel tests/**/*.spec.js -o tests/tests.js",
     "test": "mocha tests/tests.js"
   },
   "repository": {
@@ -27,7 +27,6 @@
     "babel-cli": "^6.10.1",
     "babel-preset-es2015": "^6.9.0",
     "chai": "^3.5.0",
-    "github": "^1.1.2",
     "mocha": "^2.5.3"
   }
 }
