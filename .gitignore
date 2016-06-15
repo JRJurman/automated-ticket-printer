@@ -4,6 +4,9 @@ dist/*
 # compiled tests
 tests/*.js
 
+# test reports (which should only be made by circleci)
+test-results.xml
+
 # Logs
 logs
 *.log
