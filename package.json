@@ -11,6 +11,7 @@
     "prepublish": "npm run build",
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "babel src -o dist/ticket-printer.js",
+    "pretest": "babel tests/**/*.spec.js -o tests/tests.js",
     "test": "mocha tests/tests.js"
   },
   "repository": {
