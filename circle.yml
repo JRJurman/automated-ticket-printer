@@ -7,4 +7,4 @@ test:
     - npm run test:ci
   post:
     - mkdir tests/results
-    - mv test-result.xml tests/results/test-result.xml
+    - mv test-results.xml tests/results/test-results.xml
