@@ -9,14 +9,14 @@ export const consolePrinter = {
 
   /* printTicket function to display the ticket */
   printTicket: function(ticket, watch) {
-    const ticketPrintOut = `\n
-    ================Ticket-Start================\n
-    WATCH: ${watch.name}\n
-    PROJECT: ${ticket.project}\n
-    TICKET: ${ticket.title} #${ticket.number}\n
-    \n
-    ${ticket.body}\n
-    =================Ticket-End=================\n
+    const ticketPrintOut = `
+    ================Ticket-Start================
+    WATCH: ${watch.name}
+    PROJECT: ${ticket.project}
+    TICKET: ${ticket.title} ${ticket.number}
+
+    ${ticket.body}
+    =================Ticket-End=================
     `;
     console.log(ticketPrintOut);
   }
