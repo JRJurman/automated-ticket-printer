@@ -1,27 +1,22 @@
 # Ticket Printer
-Print your github / jira / trello tickets in real life!
-
-## Purpose
-Over the course of the last few years, I've kept track of my work items by
-writing them on post-it notes, and then putting them on my laptop, monitors,
-etc, and then putting them on a makeshift spindle (2 paperclips) when I was done
-.  
-
-https://scontent-ord1-1.xx.fbcdn.net/t31.0-8/11807631_10206715064810468_2145873783479697970_o.jpg
-
 This project is an automated solution to print tickets and items as they get
-assigned to me, and then stick them on a rack to be kept before sticking them on
-a real spindle!  
+assigned.
 
-## The Items
-[Tessel 2, https://tessel.io/](https://tessel.io/)  
-[Mini Thermal Receipt Printer, https://www.adafruit.com/products/600](https://www.adafruit.com/products/600)  
-[Check Spindle, http://www.amazon.com/KegWorks-Restaurant-Check-Spindle/dp/B0053GAJOI/](http://www.amazon.com/KegWorks-Restaurant-Check-Spindle/dp/B0053GAJOI/)  
-[Slide Rack, http://www.amazon.com/San-Jamar-CK6518A-Anodized-Aluminum/dp/B005IVQTZG/](http://www.amazon.com/San-Jamar-CK6518A-Anodized-Aluminum/dp/B005IVQTZG/)  
+## System Design
+This project uses a combination of `watches`, `hooks`, and `printers` to get  
+and print tickets at either a time interval, or on tiggered events.
 
-## Why the Tessel?
-While the Tessel isn't really required, the motivation for the project actually
-came from looking through Tessel's supported modules, which landed me here:
-https://www.hackster.io/zaccolley/thermal-printer-module-for-tessel-74293b  
+### `ActivityWatcher`
+The `ActivityWatcher` is the server that collects `watches`, `hooks`, and `printers`  
+and acts as a mediator. `watches` and `hooks` do not need to know how they will be  
+printed, and `printers` do not need to know how to get new tickets, or who to get  
+them from.
 
-I'm basically using this as a reason to get a Tessel 2.
+#### `#constructor([environment])`
+Builds the `ActivityWatcher` object, and can take in an environment variable for  
+specific settings when running.
+
+```javascript
+var ActivityWatcher = require('ticket-printer').ActivityWatcher;
+var aw = new ActivityWatcher({printLogs:true});
+```
