@@ -5,3 +5,7 @@ var timeWatch = require('../dist/ticket-printer').timeWatch;
 var aw = new ActivityWatcher({printLogs:true});
 aw.addPrinter(consolePrinter);
 aw.addWatch(timeWatch, 5000);
+
+setTimeout(() => {
+  aw.reset();
+}, 40000)
