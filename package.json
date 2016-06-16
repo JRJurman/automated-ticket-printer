@@ -14,7 +14,9 @@
     "pretest": "babel tests/**/*.spec.js -o tests/tests.js",
     "test": "mocha tests/tests.js",
     "pretest:ci": "npm run pretest",
-    "test:ci": "mocha tests/tests.js --reporter mocha-junit-reporter"
+    "test:ci": "mocha tests/tests.js --reporter mocha-junit-reporter",
+    "pretest:debug": "npm run pretest",
+    "test:debug": "mocha --debug-brk=5858 tests/tests.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,8 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
+    "lolex": "^1.5.0",
     "mocha": "^2.5.3",
     "mocha-junit-reporter": "^1.11.1"
   }
