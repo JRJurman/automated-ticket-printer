@@ -5,7 +5,7 @@
 export class ActivityWatcher {
 
   /**
-    constructor
+    constructor([environment])
     takes in an  environment object, which has the following properties:
       printLogs -> (bool) will print to console.log when events occur
   */
@@ -25,7 +25,7 @@ export class ActivityWatcher {
   }
 
   /**
-    addPrinter
+    addPrinter(printer)
     adds a printer object for watches and hooks to print to
     must have the following properties:
       name -> (string) name of the printer
@@ -41,7 +41,7 @@ export class ActivityWatcher {
   }
 
   /**
-    addWatch
+    addWatch(watch, interval)
     adds a watch object for printing tickets at an intervals
     interval -> (integer) how long in ms to check for new tickets
     watch must have the following properties:
@@ -52,7 +52,7 @@ export class ActivityWatcher {
   addWatch(watch, interval) {
     this.log(`Adding ${watch.name}`);
 
-    setInterval( () => {
+    let setIntervalId = setInterval( () => {
       this.log(`Checking for Tickets from ${watch.name}`);
       let tickets = watch.getTicketObjects();
 
@@ -64,13 +64,18 @@ export class ActivityWatcher {
       });
     }, interval);
 
+    /* add close function to watch to remove the watch interval */
+    watch.close = function() {
+      clearInterval(setIntervalId);
+    }
+
     this.watches.push(watch);
 
     this.log(`Added ${watch.name}`);
   }
 
   /**
-    addHook
+    addHook(hook)
     adds a hook object for printing tickets when an event occurs
     TODO: This has yet to be defined
   */
@@ -80,6 +85,27 @@ export class ActivityWatcher {
     this.hooks.push(hook);
 
     this.log(`Added ${hook.name}`);
+  }
+
+  /**
+    reset()
+    stops watches from running and removes all watches, hooks, and printers
+  */
+  reset() {
+    this.log("Reseting Activity Watcher");
+
+    /* close each watch */
+    this.watches.forEach( (watch) => {
+      this.log(`Closing ${watch.name}`)
+      watch.close();
+    })
+
+    /* reset all the arrays */
+    this.printers = [];
+    this.watches = [];
+    this.hooks = [];
+
+    this.log("Finished Reseting Activity Watcher");
   }
 }
 
