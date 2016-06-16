@@ -26,6 +26,19 @@ describe('ActivityWatcher', () => {
     }
   };
 
+  /* setup a second test watch */
+  const testWatch2 = {
+    name: 'testWatch2',
+    getTicketObjects: function() {
+      return [{
+        title: "Test Title",
+        project: "Test Project",
+        number: "0",
+        body: "Test Body"
+      }];
+    }
+  };
+
   /* setup test printer */
   const testPrinter = {
     name: 'testPrinter',
@@ -104,8 +117,6 @@ describe('ActivityWatcher', () => {
     });
 
     it('should print multiple times with multiple watches', () => {
-      let testWatch2 = Object.assign({}, testWatch);
-      testWatch2.name = "testWatch2";
       let printerSpy = chai.spy.on(testPrinter, 'printTicket');
       testActivityWatcher.addWatch(testWatch, 1000);
       testActivityWatcher.addPrinter(testPrinter);
@@ -162,8 +173,6 @@ describe('ActivityWatcher', () => {
     });
 
     it('should ask for tickets from multiple watches', () => {
-      let testWatch2 = Object.assign({}, testWatch);
-      testWatch2.name = "testWatch2";
       let watchSpy = chai.spy.on(testWatch, 'getTicketObjects');
       let watchSpy2 = chai.spy.on(testWatch2, 'getTicketObjects');
       testActivityWatcher.addWatch(testWatch, 1000);
@@ -175,8 +184,6 @@ describe('ActivityWatcher', () => {
     });
 
     it('should ask for tickets from multiple watches at different intervals', () => {
-      let testWatch2 = Object.assign({}, testWatch);
-      testWatch2.name = "testWatch2";
       let watchSpy = chai.spy.on(testWatch, 'getTicketObjects');
       let watchSpy2 = chai.spy.on(testWatch2, 'getTicketObjects');
       testActivityWatcher.addWatch(testWatch, 1000);
