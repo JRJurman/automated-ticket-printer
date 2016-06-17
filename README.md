@@ -129,7 +129,7 @@ var examplePrinter = {
 ```
 
 ### `hooks`
-TODO
+**TODO: This has yet to be defined**
 
 ## Bundled Objects
 With this project, there are several bundled examples to make understanding and
