@@ -14,8 +14,8 @@ export const timeWatch = {
 
     // list of tickets to return
     return [{
-      title: "THE TIME",
-      project: "LIFE",
+      title: "TIME-WATCH",
+      project: "TIME",
       number: `#${this.counter}`,
       body: `The current time is ${time}`
     }];
