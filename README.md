@@ -166,3 +166,5 @@ This is a bundled printer that prints the ticket to the console.
 ## Contributing
 If you would like to contribute to this project, feel free to fork this repository
 and make a Pull-Request. PRs should include new tests and documentation updates.
+Commits should be semi-formal. While the PR's description will be review first-and-foremost,
+commits should have a present-tense single line that details what will be added.
