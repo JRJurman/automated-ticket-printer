@@ -5,7 +5,7 @@ new ticket sources (github, jira, trello, etc...) and printers easy to connect t
 each other.
 
 ## Installation
-This is a Node.js project, and requires npm and node to build the project.  
+This is a Node.js project, and requires npm and node to build the project.
 First clone or download the repository from github, and then run `npm install` in
 the root directory to install all the dependencies.
 
