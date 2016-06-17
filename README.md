@@ -30,8 +30,8 @@ and print tickets at either a time interval, or on tiggered events.
 
 ### `ActivityWatcher`
 The `ActivityWatcher` is the server that collects `watches`, `hooks`, and `printers`
-and acts as a mediator. `watches` and `hooks` do not need to know how their tickets 
-will be printed, and `printers` do not need to know how to get new tickets, or who 
+and acts as a mediator. `watches` and `hooks` do not need to know how their tickets
+will be printed, and `printers` do not need to know how to get new tickets, or who
 to get them from.
 
 #### `#constructor([environment])`
@@ -114,7 +114,7 @@ and manually checking via an API call would be easier. Watches need to be added 
 Watches are expected to have the following properties:  
 - `name`, which maps to a string.  
 - `getTicketObjects`, which maps to a function that returns a list of `tickets`.
-Look at the `tickets` section to see the required properties for a ticket. 
+Look at the `tickets` section to see the required properties for a ticket.
 
 ```javascript
 var exampleWatch = {
