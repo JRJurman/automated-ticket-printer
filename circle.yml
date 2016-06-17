@@ -1,0 +1,5 @@
+test:
+  override:
+    - npm run test:ci
+  post:
+    - mv test-results.xml $CIRCLE_TEST_REPORTS/test-results.xml

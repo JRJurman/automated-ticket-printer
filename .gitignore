@@ -1,0 +1,17 @@
+# distributable
+dist/*
+
+# compiled tests
+tests/*.js
+
+# test reports (which should only be made by circleci)
+test-results.xml
+
+# Logs
+logs
+*.log
+*.log.*
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
