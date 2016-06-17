@@ -20,3 +20,48 @@ specific settings when running.
 var ActivityWatcher = require('ticket-printer').ActivityWatcher;
 var aw = new ActivityWatcher({printLogs:true});
 ```
+
+#### `#addPrinter(printer)`
+Adds a printer object for watches and hooks to print to. You can use a bundled printer  
+or you can write your own printer (look at `printers` section).
+
+```javascript
+var ActivityWatcher = require('ticket-printer').ActivityWatcher;
+var consolePrinter = require('ticket-printer').consolePrinter;
+
+var aw = new ActivityWatcher();
+aw.addPrinter(consolePrinter);
+```
+
+#### `#addWatch(watch, interval)`
+Adds a watch object for printing tickets at an intervals. This is useful if you can not  
+add your own hooks to a project or organization. The interval is an integer in ms to check  
+for new tickets from the watch. You can use a bundled watch or you can write your own  
+watch (look at `watches` section).
+
+```javascript
+var ActivityWatcher = require('ticket-printer').ActivityWatcher;
+var timeWatch = require('ticket-printer').timeWatch;
+
+var aw = new ActivityWatcher();
+aw.addWatch(timeWatch, 1000);
+```
+
+#### `addHook(hook)`
+Adds a hook object for printing tickets when an event occurs.  
+**TODO: This has yet to be defined**
+
+#### `reset()`
+Stops watches from running and removes all watches, hooks, and printers.
+
+```javascript
+var ActivityWatcher = require('ticket-printer').ActivityWatcher;
+var timeWatch = require('ticket-printer').timeWatch;
+
+var aw = new ActivityWatcher();
+aw.addWatch(timeWatch, 1000);
+aw.watches; // -> [ timeWatch ]
+
+aw.reset();
+aw.watches; // -> []
+```
