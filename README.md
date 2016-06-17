@@ -1,6 +1,28 @@
 # Ticket Printer
 This project is an automated solution to print tickets and items as they get
-assigned.
+assigned. It is a library that exposes object standards and a server for making
+new ticket sources (github, jira, trello, etc...) and printers easy to connect to
+each other.
+
+## Installation
+This is a Node.js project, and requires npm and node to build the project.  
+First clone or download the repository from github, and then run `npm install` in
+the root directory to install all the dependencies.
+
+## Building, Testing, and other Scripts
+This project contains several npm scripts to help build and test the project.  
+- `npm run build`: builds the project into `dist/ticket-printer.js`, happens
+after `npm install` by default.  
+- `npm test`: runs mocha tests on the project
+- `npm test:ci`: runs mocha tests and returns a report to be read by circleci, happens
+after making a PR or new branch on github.
+- `npm test:debug`: runs mocha tests with a debugger that can be inspected on port 5858.
+You can use a node-debugger (such as atom's `Node Debugger`) to attach and inspect the
+process.
+
+## Running
+This project has no executable, but it has example scripts in the `example_scripts`
+directory, which show basic use cases and demonstrate how to use the bundled objects.
 
 ## System Design
 This project uses a combination of `watches`, `hooks`, and `printers` to get
@@ -8,9 +30,9 @@ and print tickets at either a time interval, or on tiggered events.
 
 ### `ActivityWatcher`
 The `ActivityWatcher` is the server that collects `watches`, `hooks`, and `printers`
-and acts as a mediator. `watches` and `hooks` do not need to know how they will be
-printed, and `printers` do not need to know how to get new tickets, or who to get
-them from.
+and acts as a mediator. `watches` and `hooks` do not need to know how their tickets 
+will be printed, and `printers` do not need to know how to get new tickets, or who 
+to get them from.
 
 #### `#constructor([environment])`
 Builds the `ActivityWatcher` object, and can take in an environment variable for
@@ -140,3 +162,7 @@ This is a bundled watch that always returns a single ticket with the current tim
 
 ### `consolePrinter`
 This is a bundled printer that prints the ticket to the console.
+
+## Contributing
+If you would like to contribute to this project, feel free to fork this repository
+and make a Pull-Request. PRs should include new tests and documentation updates.
