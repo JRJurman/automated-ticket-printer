@@ -1,12 +1,20 @@
 {
   "name": "ticket-printer",
   "version": "0.0.1",
-  "description": "Print your github / jira / trello tickets in real life!",
+  "description": "This project is an automated solution to print tickets and items as they get assigned.",
+  "author": {
+    "name": "Jesse Jurman",
+    "email": "j.r.jurman@gmail.com"
+  },
   "babel": {
     "presets": [
       "es2015"
     ]
   },
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/ticket-printer.js",
   "scripts": {
     "prepublish": "npm run build",
     "prebuild": "rm -rf dist && mkdir dist",
@@ -22,7 +30,6 @@
     "type": "git",
     "url": "git+https://github.com/JRJurman/ticket-printer.git"
   },
-  "author": "Jesse Jurman",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/JRJurman/ticket-printer/issues"
