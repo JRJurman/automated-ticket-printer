@@ -14,9 +14,9 @@ This project contains several npm scripts to help build and test the project.
 - `npm run build`: builds the project into `dist/ticket-printer.js`, happens
 after `npm install` by default.  
 - `npm test`: runs mocha tests on the project
-- `npm test:ci`: runs mocha tests and returns a report to be read by circleci, happens
+- `npm run test:ci`: runs mocha tests and returns a report to be read by circleci, happens
 after making a PR or new branch on github.
-- `npm test:debug`: runs mocha tests with a debugger that can be inspected on port 5858.
+- `npm run test:debug`: runs mocha tests with a debugger that can be inspected on port 5858.
 You can use a node-debugger (such as atom's `Node Debugger`) to attach and inspect the
 process.
 
