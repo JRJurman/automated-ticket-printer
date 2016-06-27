@@ -13,6 +13,7 @@ export class ActivityWatcher {
     this.printers = [];
     this.watches = [];
     this.hooks = [];
+    this.printQueue = [];
     this.env = environment || {};
 
     this.log = function(log) {
@@ -25,12 +26,52 @@ export class ActivityWatcher {
   }
 
   /**
+    start(printInterval)
+    will start a loop for checking the print queue, and will start all the
+    watches. printInterval is how often the ActivityWatcher will check for
+    tickets in the print queue.
+  */
+  start(printInterval) {
+
+    /* print loop */
+    this.startInterval = setInterval( () => {
+      if (this.printQueue.length > 0) {
+        this.log(`${this.printQueue.length} in the print queue`);
+      }
+
+      while (this.printQueue.length > 0) {
+        let ticket = this.printQueue.pop();
+        this.printers.forEach( (printer) => {
+          printer.printTicket(ticket);
+        });
+      }
+
+    }, printInterval);
+
+    /* start all the watches */
+    this.watches.forEach( (watch) => {
+
+      let setIntervalId = setInterval( () => {
+        this.log(`Checking for Tickets from ${watch.name}`);
+        watch.getTicketObjects( this.printQueue );
+      }, watch._interval);
+
+      /* add close function to watch to remove the watch interval */
+      watch.close = function() {
+        clearInterval(setIntervalId);
+      }
+
+    });
+
+  }
+
+  /**
     addPrinter(printer)
     adds a printer object for watches and hooks to print to
     must have the following properties:
       name -> (string) name of the printer
       printTicket -> (function) function to print ticket object
-        printTicket takes in two parameters: ticket, and watch
+        printTicket takes in a single parameter, the ticket json
   */
   addPrinter(printer) {
     this.log(`Adding ${printer.name}`);
@@ -52,23 +93,8 @@ export class ActivityWatcher {
   addWatch(watch, interval) {
     this.log(`Adding ${watch.name}`);
 
-    let setIntervalId = setInterval( () => {
-      this.log(`Checking for Tickets from ${watch.name}`);
-      let tickets = watch.getTicketObjects();
-
-      this.log(`Recieved ${tickets.length} ticket(s)`);
-      tickets.forEach( (ticket) => {
-        this.printers.forEach( (printer) => {
-          printer.printTicket(ticket, watch);
-        });
-      });
-    }, interval);
-
-    /* add close function to watch to remove the watch interval */
-    watch.close = function() {
-      clearInterval(setIntervalId);
-    }
-
+    /* attach interval parameter to watch object*/
+    watch._interval = interval;
     this.watches.push(watch);
 
     this.log(`Added ${watch.name}`);
@@ -98,7 +124,10 @@ export class ActivityWatcher {
     this.watches.forEach( (watch) => {
       this.log(`Closing ${watch.name}`)
       watch.close();
-    })
+    });
+
+    /* stop the print loop */
+    clearInterval(this.startInterval);
 
     /* reset all the arrays */
     this.printers = [];
