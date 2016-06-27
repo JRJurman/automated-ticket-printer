@@ -12,14 +12,11 @@ function lastCallOf(spy) {
 describe('ConsolePrinter', () => {
 
   const ticket = {
+    watch: 'test watch',
     title: "Test Title",
     project: "Test Project",
     number: "0",
     body: "Test Body"
-  }
-
-  const watch = {
-    name: 'test watch'
   }
 
   describe('#printTicket', () => {
@@ -27,15 +24,16 @@ describe('ConsolePrinter', () => {
     it('should print to the console log', () => {
       let printerSpy = chai.spy.on(console, 'log');
 
-      consolePrinter.printTicket(ticket, watch);
+      consolePrinter.printTicket(ticket);
       expect(printerSpy).to.be.called.once;
     });
 
     it('should print a ticket to the console log', () => {
       let printerSpy = chai.spy.on(console, 'log');
 
-      consolePrinter.printTicket(ticket, watch);
+      consolePrinter.printTicket(ticket);
       let terminalTape = lastCallOf(printerSpy)
+      expect(terminalTape).to.contain(ticket.watch);
       expect(terminalTape).to.contain(ticket.title);
       expect(terminalTape).to.contain(ticket.project);
       expect(terminalTape).to.contain(ticket.number);
