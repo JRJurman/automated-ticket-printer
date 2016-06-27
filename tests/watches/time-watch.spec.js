@@ -11,12 +11,17 @@ describe('TimeWatch', () => {
 
     it('should return a ticket with the current time', () => {
       const rightNow = (new Date()).toLocaleTimeString();
-      const ticket = timeWatch.getTicketObjects()[0];
+      let printQueue = [];
+      timeWatch.getTicketObjects( printQueue );
+      const ticket = printQueue[0];
       expect(ticket.body).to.equal(`The current time is ${rightNow}`)
     });
 
-    it('should return a ticket with a title, project, number, and body', () => {
-      const ticket = timeWatch.getTicketObjects()[0];
+    it('should return a ticket with ticket properties', () => {
+      let printQueue = [];
+      timeWatch.getTicketObjects( printQueue );
+      const ticket = printQueue[0];
+      expect(ticket.watch).to.exist;
       expect(ticket.title).to.exist;
       expect(ticket.project).to.exist;
       expect(ticket.number).to.exist;
