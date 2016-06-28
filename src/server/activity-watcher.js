@@ -133,6 +133,7 @@ export class ActivityWatcher {
     this.printers = [];
     this.watches = [];
     this.hooks = [];
+    this.printQueue = [];
 
     this.log("Finished Reseting Activity Watcher");
   }
