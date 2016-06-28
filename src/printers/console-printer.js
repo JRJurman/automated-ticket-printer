@@ -8,10 +8,10 @@ export const consolePrinter = {
   name: "Console Printer",
 
   /* printTicket function to display the ticket */
-  printTicket: function(ticket, watch) {
+  printTicket: function(ticket) {
     const ticketPrintOut = `
     ================Ticket-Start================
-    WATCH: ${watch.name}
+    WATCH: ${ticket.watch}
     PROJECT: ${ticket.project}
     TICKET: ${ticket.title} ${ticket.number}
 
