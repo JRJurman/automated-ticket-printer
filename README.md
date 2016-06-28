@@ -2,7 +2,7 @@
 This project is an automated solution to print tickets and items as they get
 assigned. It is a library that exposes object standards and a server for making
 new ticket sources (github, jira, trello, etc...) and printers (console,
-receipt, etc...) easy to connect to each other.
+receipt printer, web browser, etc...) easy to connect to each other.
 
 ## Installation
 This is a Node.js project, and requires npm and node to build the project. First
