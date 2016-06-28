@@ -85,7 +85,7 @@ describe('ActivityWatcher', () => {
       expect(testActivityWatcher.watches).to.be.empty;
     });
 
-  });
+  }); /* #constructor */
 
   describe('#addPrinter', () => {
 
@@ -140,7 +140,7 @@ describe('ActivityWatcher', () => {
       expect(printerSpy).to.have.been.called.with(ticket2);
     });
 
-  });
+  }); /* #addPrinter */
 
   describe('#addWatch', () => {
 
@@ -215,7 +215,7 @@ describe('ActivityWatcher', () => {
       expect(watchSpy2).to.have.been.called.exactly(3);
     });
 
-  });
+  }); /* #addWatch */
 
   describe('#addHook', () => {
 
@@ -233,7 +233,53 @@ describe('ActivityWatcher', () => {
       expect(testActivityWatcher.hooks).to.include(testHook);
     });
 
-  });
+  }); /* #addHook */
+
+  describe('#start', () => {
+
+    beforeEach( () => {
+      testActivityWatcher = new ActivityWatcher();
+    });
+
+    afterEach( () => {
+      testActivityWatcher.reset();
+    });
+
+    it('should start watches added', () => {
+      testActivityWatcher.addWatch(testWatch, 1000);
+
+      clock.tick(1000);
+      expect(testActivityWatcher.printQueue).to.be.empty;
+      testActivityWatcher.start(5000);
+      clock.tick(1000);
+      expect(testActivityWatcher.printQueue).to.not.be.empty;
+    });
+
+    it('should trigger watch to add a ticket to the printQueue', () => {
+      testActivityWatcher.addWatch(testWatch, 1000);
+      testActivityWatcher.start(5000);
+
+      clock.tick(1000);
+      expect(testActivityWatcher.printQueue).to.not.be.empty;
+    });
+
+    it('should trigger watch to add multiple tickets to the printQueue', () => {
+      testActivityWatcher.addWatch(testWatch, 1000);
+      testActivityWatcher.start(5000);
+
+      clock.tick(2000);
+      expect(testActivityWatcher.printQueue.length).to.equal(2);
+    });
+
+    it('should empty tickets in the printQueue over time', () => {
+      testActivityWatcher.addWatch(testWatch, 1000);
+      testActivityWatcher.start(1001);
+
+      clock.tick(1001);
+      expect(testActivityWatcher.printQueue).to.be.empty;
+    });
+
+  }); /* #start */
 
   describe('#reset', () => {
 
@@ -257,7 +303,27 @@ describe('ActivityWatcher', () => {
       expect(watchSpy).to.have.been.called.once;
     });
 
-  });
+    it('should empty all the property arrays', () => {
+      testActivityWatcher.addWatch(testWatch, 1000);
+      testActivityWatcher.addHook(testHook);
+      testActivityWatcher.addPrinter(testPrinter);
+
+      testActivityWatcher.reset();
+      expect(testActivityWatcher.watches).to.be.empty;
+      expect(testActivityWatcher.printers).to.be.empty;
+      expect(testActivityWatcher.hooks).to.be.empty;
+    });
+
+    it('should empty the printQueue', () => {
+      testActivityWatcher.addWatch(testWatch, 500);
+      testActivityWatcher.start(1000);
+
+      clock.tick(500);
+      testActivityWatcher.reset();
+      expect(testActivityWatcher.printQueue).to.be.empty;
+    });
+
+  }); /* #reset */
 
 
 });
