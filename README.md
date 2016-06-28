@@ -212,8 +212,8 @@ work on it. For issues with the **discussion** label, I'm looking for
 comments or feedback, usually on potential features or work items that aren't
 completely defined yet, or need some fleshing out.  
 
-### PRs
-There are also [PRs with the **needs review**](https://github.com/JRJurman/ticket-printer/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3A%22needs%20review%22) label. One way that anyone can contribute is by reviewing
+### Pull Requests
+There are also [Pull Requests with the **needs review**](https://github.com/JRJurman/ticket-printer/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3A%22needs%20review%22) label. One way that anyone can contribute is by reviewing
 PRs with this label. These PRs may include large code changes, or small README
 updates. If a PR looks confusing, or is unclear, call it out! This project
 should be easy to approach and make changes to. If a new PR does not include
