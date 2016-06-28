@@ -1,6 +1,6 @@
 {
   "name": "ticket-printer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "This project is an automated solution to print tickets and items as they get assigned.",
   "author": {
     "name": "Jesse Jurman",
