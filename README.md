@@ -1,38 +1,39 @@
 # Ticket Printer
 This project is an automated solution to print tickets and items as they get
 assigned. It is a library that exposes object standards and a server for making
-new ticket sources (github, jira, trello, etc...) and printers easy to connect to
-each other.
+new ticket sources (github, jira, trello, etc...) and printers easy to connect
+to each other.
 
 ## Installation
-This is a Node.js project, and requires npm and node to build the project.
-First clone or download the repository from github, and then run `npm install` in
-the root directory to install all the dependencies.
+This is a Node.js project, and requires npm and node to build the project. First
+clone or download the repository from github, and then run `npm install` in the
+root directory to install all the dependencies.
 
 ## Building, Testing, and other Scripts
 This project contains several npm scripts to help build and test the project.  
 - `npm run build`: builds the project into `dist/ticket-printer.js`, happens
 after `npm install` by default.  
 - `npm test`: runs mocha tests on the project
-- `npm run test:ci`: runs mocha tests and returns a report to be read by circleci, happens
-after making a PR or new branch on github.
-- `npm run test:debug`: runs mocha tests with a debugger that can be inspected on port 5858.
-You can use a node-debugger (such as atom's `Node Debugger`) to attach and inspect the
-process.
+- `npm run test:ci`: runs mocha tests and returns a report to be read by
+circleci, happens after making a PR or new branch on github.
+- `npm run test:debug`: runs mocha tests with a debugger that can be inspected
+on port 5858. You can use a node-debugger (such as atom's `Node Debugger`) to
+attach and inspect the process.
 
 ## Running
-This project has no executable, but it has example scripts in the `example_scripts`
-directory, which show basic use cases and demonstrate how to use the bundled objects.
+This project has no executable, but it has example scripts in the
+`example_scripts` directory, which show basic use cases and demonstrate how to
+use the bundled objects.
 
 ## System Design
 This project uses a combination of `watches`, `hooks`, and `printers` to get
 and print tickets at either a time interval, or on tiggered events.
 
 ### `ActivityWatcher`
-The `ActivityWatcher` is the server that collects `watches`, `hooks`, and `printers`
-and acts as a mediator. `watches` and `hooks` do not need to know how their tickets
-will be printed, and `printers` do not need to know how to get new tickets, or who
-to get them from.
+The `ActivityWatcher` is the server that collects `watches`, `hooks`, and
+`printers` and acts as a mediator. `watches` and `hooks` do not need to know how
+their tickets will be printed, and `printers` do not need to know how to get new
+tickets, or who to get them from.
 
 #### `#constructor([environment])`
 Builds the `ActivityWatcher` object, and can take in an environment variable for
@@ -43,9 +44,23 @@ var ActivityWatcher = require('ticket-printer').ActivityWatcher;
 var aw = new ActivityWatcher({printLogs:true});
 ```
 
+#### `#start(printInterval)`
+Kicks off all the watches, and creates a loop that checks the print queue for
+new tickets at the `printInterval`. `printInterval` should be in milliseconds,
+and should be faster than any of the watches, unless you want tickets to build
+up before printing them. If there is more than one ticket in the queue, they
+will all be printed (for more information, look at `printQueue` below).  
+
+```javascript
+var ActivityWatcher = require('ticket-printer').ActivityWatcher;
+
+var aw = new ActivityWatcher({printLogs:true});
+aw.start(1000);
+```
+
 #### `#addPrinter(printer)`
-Adds a printer object for watches and hooks to print to. You can use a bundled printer
-or you can write your own printer (look at `printers` section).
+Adds a printer object for watches and hooks to print to. You can use a bundled
+printer or you can write your own printer (look at `printers` section).
 
 ```javascript
 var ActivityWatcher = require('ticket-printer').ActivityWatcher;
@@ -56,9 +71,11 @@ aw.addPrinter(consolePrinter);
 ```
 
 #### `#addWatch(watch, interval)`
-Adds a watch object for printing tickets at an intervals. This is useful if you can not
-add your own hooks to a project or organization. The interval is an integer in ms to check
-for new tickets from the watch. You can use a bundled watch or you can write your own
+Adds a watch object for printing tickets at an intervals. This is useful if you
+can not add your own hooks to a project or organization. The interval is an
+integer in milliseconds to check for new tickets from the watch. This is
+attached to the watch as `._interval`, so that the watch can be kicked off in
+`#start` (read above). You can use a bundled watch or you can write your own
 watch (look at `watches` section).
 
 ```javascript
@@ -74,7 +91,9 @@ Adds a hook object for printing tickets when an event occurs.
 **TODO: This has yet to be defined**
 
 #### `#reset()`
-Stops watches from running and removes all watches, hooks, and printers.
+Stops watches from running and removes all watches, hooks, and printers. It also
+stops the print check that happens after `#start`, and clears the print queue,
+if there were any tickets leftover.
 
 ```javascript
 var ActivityWatcher = require('ticket-printer').ActivityWatcher;
@@ -89,8 +108,10 @@ aw.watches; // -> []
 ```
 
 ### `tickets`
-Tickets are objects which are generated by `watches` and `hooks`, and are passed on to
-(possibly multiple) printers by the `ActivityWatcher`. They have the following properties:  
+Tickets are objects which are generated by `watches` and `hooks`, and are passed
+on to (possibly multiple) printers by the `ActivityWatcher`. They have the
+following properties:  
+- `watch`, a string, the name of the watch
 - `title`, a string, the title of the ticket
 - `project`, a string, the project that the ticket belongs to
 - `number`, a string, the id or number of the ticket
@@ -98,6 +119,7 @@ Tickets are objects which are generated by `watches` and `hooks`, and are passed
 
 ```javascript
 var exampleTicket = {
+  watch: "Example Watch",
   title: "Messages are lost in queue",
   project: "Chats-R-Us",
   number: "#27a",
@@ -105,27 +127,39 @@ var exampleTicket = {
 };
 ```
 
+### `printQueue`
+The `printQueue` is a queue that lives in ActivityWatcher. It is passed to the
+`getTicketObjects` function, which then can enqueue tickets to be printed
+whenever the `ActivityWatcher` loops around to check it (see `#start` above). It
+will always be a list of tickets to print, and pops off those tickets as it
+sends them to all the printers. If there are no printers, tickets are still
+popped off the queue.
+
 ### `watches`
-Watches are javascript objects which are queried for tickets at a given time interval.
-This is valuable when hooks are not available (due to permissions or availability)
-and manually checking via an API call would be easier. Watches need to be added to an
-`ActivityWatcher`, and print to all the `printers` added to the `ActivityWatcher`.
+Watches are javascript objects which are queried for tickets at a given time
+interval. This is valuable when hooks are not available (due to permissions or
+availability) and manually checking via an API call would be easier. Watches
+need to be added to an `ActivityWatcher`, and print to all the `printers` added
+to the `ActivityWatcher`.  
 
 Watches are expected to have the following properties:  
 - `name`, which maps to a string.  
-- `getTicketObjects`, which maps to a function that returns a list of `tickets`.
-Look at the `tickets` section to see the required properties for a ticket.
+- `getTicketObjects`, which maps to a function that takes in a printQueue to
+mutate, and returns nothing. To print tickets in order, the `unshift` function
+should be used to push tickets onto the queue. Look at `printQueue` above for
+more details.
 
 ```javascript
 var exampleWatch = {
   name: "My First Watch",
-  getTicketObjects: function() {
-    return [{
+  getTicketObjects: function( printQueue ) {
+    printQueue.unshift({
+      watch: "Example Watch",
       title: "Messages are lost in queue",
       project: "Chats-R-Us",
       number: "#27a",
       body: "When sending messages using ..."
-    }];
+    });
   }
 };
 ```
@@ -137,14 +171,12 @@ Except for testing, it is rare that you call the functions directly.
 
 Printers are expected to have the following properties:  
 - `name`, which maps to a string.
-- `printTicket`, which maps to a function that takes a ticket object, and a watch  
-object.
+- `printTicket`, which maps to a function that takes a ticket object
 
 ```javascript
 var examplePrinter = {
   name: "My First Printer",
-  printTicket: function(ticket, watch) {
-    console.log("Found a ticket from " + watch.name);
+  printTicket: function(ticket) {
     console.log(ticket.name + ": " + ticket.body);
   }
 };
@@ -158,13 +190,15 @@ With this project, there are several bundled examples to make understanding and
 working with this project easier.
 
 ### `timeWatch`
-This is a bundled watch that always returns a single ticket with the current time.
+This is a bundled watch that always returns a single ticket with the current
+time.
 
 ### `consolePrinter`
 This is a bundled printer that prints the ticket to the console.
 
 ## Contributing
-If you would like to contribute to this project, feel free to fork this repository
-and make a Pull-Request. PRs should include new tests and documentation updates.
-Commits should be semi-formal. While the PR's description will be review first-and-foremost,
-commits should have a present-tense single line that details what will be added.
+If you would like to contribute to this project, feel free to fork this
+repository and make a Pull-Request. PRs should include new tests and
+documentation updates. Commits should be semi-formal. While the PR's description
+will be review first-and-foremost, commits should have a present-tense single
+line that details what will be added.
