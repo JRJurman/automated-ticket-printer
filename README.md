@@ -203,14 +203,22 @@ documentation updates. Commits should be semi-formal. While the PR's description
 will be reviewed first-and-foremost, commits should have a present-tense single
 line that details what will be added.  
 
-### Current Tasks
+### Issues
 If you want to help contribute, but don't know what needs to be worked on, check
 [the issues tab on github](https://github.com/JRJurman/ticket-printer/issues).
 Anything on there that is not assigned is up-for-grabs. For any issues with the
 **help wanted** label, I'm specifically looking for comments or someone to help
 work on it. For issues with the **discussion** label, I'm looking for
 comments or feedback, usually on potential features or work items that aren't
-completely defined yet, or need some fleshing out.
+completely defined yet, or need some fleshing out.  
+
+### PRs
+There are also [PRs with the **needs review**](https://github.com/JRJurman/ticket-printer/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3A%22needs%20review%22) label. One way that anyone can contribute is by reviewing
+PRs with this label. These PRs may include large code changes, or small README
+updates. If a PR looks confusing, or is unclear, call it out! This project
+should be easy to approach and make changes to. If a new PR does not include
+enough documentation (in the form of comments, or in the README), then the PR
+should be updated.
 
 ### Watches, Printers, Hooks, Oh My!
 If you want to contribute by making new watches, printers, or hooks, that's
@@ -220,7 +228,7 @@ use. A web page that shows incoming JIRA cards, maybe a receipt printer that
 prints github issues, or a text console that shows all the new Trello bugs for
 the day. The possibilities are endless, and I want to see how many we can bring
 together.  
-  
+
 _New Watches, Printers, and Hooks should only introduce the minimum required
 dependencies. I realize in the future, including several Node APIs may get out
 of hand. When that happens, this project may go the way of babel (separate
