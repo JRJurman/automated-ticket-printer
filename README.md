@@ -1,8 +1,8 @@
 # Ticket Printer
 This project is an automated solution to print tickets and items as they get
 assigned. It is a library that exposes object standards and a server for making
-new ticket sources (github, jira, trello, etc...) and printers easy to connect
-to each other.
+new ticket sources (github, jira, trello, etc...) and printers (console,
+receipt, etc...) easy to connect to each other.
 
 ## Installation
 This is a Node.js project, and requires npm and node to build the project. First
@@ -200,5 +200,13 @@ This is a bundled printer that prints the ticket to the console.
 If you would like to contribute to this project, feel free to fork this
 repository and make a Pull-Request. PRs should include new tests and
 documentation updates. Commits should be semi-formal. While the PR's description
-will be review first-and-foremost, commits should have a present-tense single
-line that details what will be added.
+will be reviewed first-and-foremost, commits should have a present-tense single
+line that details what will be added.  
+
+If you want to help contribute, but don't know what needs to be worked on, check
+[the issues tab on github](https://github.com/JRJurman/ticket-printer/issues).
+Anything on there that is not assigned is up-for-grabs. For any issues with the
+**help wanted** label, I'm specifically looking for comments or someone to help
+work on it. For issues with the **discussion** label, I'm looking for
+comments or feedback, usually on potential features or work items that aren't
+completely defined yet, or need some fleshing out.
