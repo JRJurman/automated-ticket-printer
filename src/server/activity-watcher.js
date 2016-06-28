@@ -71,7 +71,7 @@ export class ActivityWatcher {
     must have the following properties:
       name -> (string) name of the printer
       printTicket -> (function) function to print ticket object
-        printTicket takes in a single parameter, the ticket json
+        printTicket takes in a single parameter, the ticket object
   */
   addPrinter(printer) {
     this.log(`Adding ${printer.name}`);
