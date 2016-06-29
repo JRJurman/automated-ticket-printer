@@ -27,7 +27,9 @@ use the bundled objects.
 
 ## System Design
 This project uses a combination of `watches`, `hooks`, and `printers` to get
-and print tickets at either a time interval, or on tiggered events.
+and print tickets at either a time interval, or on triggered events.
+
+[Getting Github tickets and turning them into receipts](design/system-design.png)
 
 ### `ActivityWatcher`
 The `ActivityWatcher` is the server that collects `watches`, `hooks`, and
