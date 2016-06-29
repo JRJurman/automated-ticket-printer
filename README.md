@@ -203,7 +203,9 @@ If you would like to contribute to this project, feel free to fork this
 repository and make a Pull-Request. PRs should include new tests and
 documentation updates. Commits should be semi-formal. While the PR's description
 will be reviewed first-and-foremost, commits should have a present-tense single
-line that details what will be added.  
+line that details what will be added. For a clear example of what PRs should
+look like, look at 
+[one of the closed PRs](https://github.com/JRJurman/ticket-printer/pull/2).  
 
 ### Issues
 If you want to help contribute, but don't know what needs to be worked on, check
