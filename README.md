@@ -230,6 +230,7 @@ the day. The possibilities are endless, and I want to see how many we can bring
 together.  
 
 _New Watches, Printers, and Hooks should only introduce the minimum required
-dependencies. I realize in the future, including several Node APIs may get out
-of hand. When that happens, this project may go the way of babel (separate
-packages) however, that's something we'll tackle once we hit that bridge._
+dependencies, and these should be included as **optional dependencies**.
+I realize in the future, including several Node APIs may get out of hand. When
+that happens, this project may go the way of babel (separate packages) however,
+that's something we'll tackle once we hit that bridge._
