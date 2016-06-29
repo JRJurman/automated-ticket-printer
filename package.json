@@ -14,7 +14,7 @@
   "files": [
     "lib/"
   ],
-  "main": "dist/ticket-printer.js",
+  "main": "lib/ticket-printer.js",
   "scripts": {
     "prepublish": "not-in-install && npm run build || in-install",
     "prebuild": "rm -rf lib && mkdir lib",
