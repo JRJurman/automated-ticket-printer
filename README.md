@@ -1,8 +1,8 @@
 # Ticket Printer
 This project is an automated solution to print tickets and items as they get
 assigned. It is a library that exposes object standards and a server for making
-new ticket sources (github, jira, trello, etc...) and printers easy to connect
-to each other.
+new ticket sources (github, jira, trello, etc...) and printers (console,
+receipt printer, web browser, etc...) easy to connect to each other.
 
 ## Installation
 This is a Node.js project, and requires npm and node to build the project. First
@@ -200,5 +200,36 @@ This is a bundled printer that prints the ticket to the console.
 If you would like to contribute to this project, feel free to fork this
 repository and make a Pull-Request. PRs should include new tests and
 documentation updates. Commits should be semi-formal. While the PR's description
-will be review first-and-foremost, commits should have a present-tense single
-line that details what will be added.
+will be reviewed first-and-foremost, commits should have a present-tense single
+line that details what will be added.  
+
+### Issues
+If you want to help contribute, but don't know what needs to be worked on, check
+[the issues tab on github](https://github.com/JRJurman/ticket-printer/issues).
+Anything on there that is not assigned is up-for-grabs. For any issues with the
+**help wanted** label, I'm specifically looking for comments or someone to help
+work on it. For issues with the **discussion** label, I'm looking for
+comments or feedback, usually on potential features or work items that aren't
+completely defined yet, or need some fleshing out.  
+
+### Pull Requests
+There are also [Pull Requests with the **needs review**](https://github.com/JRJurman/ticket-printer/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3A%22needs%20review%22) label. One way that anyone can contribute is by reviewing
+PRs with this label. These PRs may include large code changes, or small README
+updates. If a PR looks confusing, or is unclear, call it out! This project
+should be easy to approach and make changes to. If a new PR does not include
+enough documentation (in the form of comments, or in the README), then the PR
+should be updated.
+
+### Watches, Printers, Hooks, Oh My!
+If you want to contribute by making new watches, printers, or hooks, that's
+100% encouraged! The dream is that this project becomes a great plug-and-play
+system, where I can hook up whatever ticket system I use into whatever display I
+use. A web page that shows incoming JIRA cards, maybe a receipt printer that
+prints github issues, or a text console that shows all the new Trello bugs for
+the day. The possibilities are endless, and I want to see how many we can bring
+together.  
+
+_New Watches, Printers, and Hooks should only introduce the minimum required
+dependencies. I realize in the future, including several Node APIs may get out
+of hand. When that happens, this project may go the way of babel (separate
+packages) however, that's something we'll tackle once we hit that bridge._
