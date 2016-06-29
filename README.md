@@ -27,7 +27,9 @@ use the bundled objects.
 
 ## System Design
 This project uses a combination of `watches`, `hooks`, and `printers` to get
-and print tickets at either a time interval, or on tiggered events.
+and print tickets at either a time interval, or on triggered events.
+
+![Getting Github tickets and turning them into receipts](design/system-design.png)
 
 ### `ActivityWatcher`
 The `ActivityWatcher` is the server that collects `watches`, `hooks`, and
@@ -201,33 +203,37 @@ If you would like to contribute to this project, feel free to fork this
 repository and make a Pull-Request. PRs should include new tests and
 documentation updates. Commits should be semi-formal. While the PR's description
 will be reviewed first-and-foremost, commits should have a present-tense single
-line that details what will be added.  
+line that details what will be added. For a clear example of what PRs should
+look like, look at 
+[one of the closed PRs](https://github.com/JRJurman/ticket-printer/pull/2).  
 
 ### Issues
 If you want to help contribute, but don't know what needs to be worked on, check
-[the issues tab on github](https://github.com/JRJurman/ticket-printer/issues).
-Anything on there that is not assigned is up-for-grabs. For any issues with the
-**help wanted** label, I'm specifically looking for comments or someone to help
-work on it. For issues with the **discussion** label, I'm looking for
-comments or feedback, usually on potential features or work items that aren't
-completely defined yet, or need some fleshing out.  
+the issues tab on github. Anything on there that is not assigned is up-for-grabs
+. Issues with the
+[**help wanted**](https://github.com/JRJurman/ticket-printer/labels/help%20wanted)
+label are for comments and are encouraged to be picked up by other developers.
+Issues with the
+[**discussion**](https://github.com/JRJurman/ticket-printer/labels/discussion)
+label are for comments or feedback, usually on potential features or work items
+that aren't completely defined yet, or need some fleshing out.  
 
 ### Pull Requests
-There are also [Pull Requests with the **needs review**](https://github.com/JRJurman/ticket-printer/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3A%22needs%20review%22) label. One way that anyone can contribute is by reviewing
-PRs with this label. These PRs may include large code changes, or small README
-updates. If a PR looks confusing, or is unclear, call it out! This project
-should be easy to approach and make changes to. If a new PR does not include
-enough documentation (in the form of comments, or in the README), then the PR
-should be updated.
+There are also Pull Requests with the
+[**needs review**](https://github.com/JRJurman/ticket-printer/labels/needs%20review)
+label. One way that anyone can contribute is by reviewing PRs with this label.
+These PRs may include large code changes, or small README updates. If a PR looks
+confusing, or is unclear, call it out! This project should be easy to approach
+and make changes to. If a new PR does not include enough documentation (in the
+form of comments, or in the README), then the PR should be updated.
 
 ### Watches, Printers, Hooks, Oh My!
 If you want to contribute by making new watches, printers, or hooks, that's
 100% encouraged! The dream is that this project becomes a great plug-and-play
-system, where I can hook up whatever ticket system I use into whatever display I
-use. A web page that shows incoming JIRA cards, maybe a receipt printer that
-prints github issues, or a text console that shows all the new Trello bugs for
-the day. The possibilities are endless, and I want to see how many we can bring
-together.  
+system, where people can hook up whatever ticket system they use into whatever
+display they use. A web page that shows incoming JIRA cards, maybe a receipt
+printer that prints github issues, or a text console that shows all the new
+Trello bugs for the day. The possibilities are endless!
 
 _New Watches, Printers, and Hooks should only introduce the minimum required
 dependencies. I realize in the future, including several Node APIs may get out
