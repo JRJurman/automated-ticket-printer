@@ -16,7 +16,7 @@
   ],
   "main": "dist/ticket-printer.js",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublish": "not-in-install && npm run build || in-install",
     "prebuild": "rm -rf lib && mkdir lib",
     "build": "babel src -o lib/ticket-printer.js",
     "pretest": "babel tests/**/*.spec.js -o tests/tests.js",
@@ -43,5 +43,8 @@
     "lolex": "^1.5.0",
     "mocha": "^2.5.3",
     "mocha-junit-reporter": "^1.11.1"
+  },
+  "dependencies": {
+    "in-publish": "^2.0.0"
   }
 }
