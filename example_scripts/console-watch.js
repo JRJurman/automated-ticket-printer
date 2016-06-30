@@ -1,6 +1,6 @@
-var ActivityWatcher = require('../dist/ticket-printer').ActivityWatcher;
-var consolePrinter = require('../dist/ticket-printer').consolePrinter;
-var timeWatch = require('../dist/ticket-printer').timeWatch;
+var ActivityWatcher = require('ticket-printer').ActivityWatcher;
+var consolePrinter = require('ticket-printer').consolePrinter;
+var timeWatch = require('ticket-printer').timeWatch;
 
 var aw = new ActivityWatcher({printLogs:true});
 aw.addPrinter(consolePrinter);
