@@ -11,8 +11,10 @@ root directory to install all the dependencies.
 
 ## Building, Testing, and other Scripts
 This project contains several npm scripts to help build and test the project.  
-- `npm run build`: builds the project into `dist/ticket-printer.js`, happens
+- `npm run build:lib`: builds the project into `lib/ticket-printer.js`, happens
 after `npm install` by default.  
+- `npm run build`: does the above build, and prepares the library for testing,
+this should be the command when developing on the project.  
 - `npm test`: runs mocha tests on the project
 - `npm run test:ci`: runs mocha tests and returns a report to be read by
 circleci, happens after making a PR or new branch on github.
