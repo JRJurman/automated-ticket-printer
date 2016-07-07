@@ -47,7 +47,7 @@
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
     "in-publish": "^2.0.0",
-    "localinstall": "^1.0.0",
+    "localinstall": "^1.2.0",
     "lolex": "^1.5.0",
     "mocha": "^2.5.3",
     "mocha-junit-reporter": "^1.11.1"
