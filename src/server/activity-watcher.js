@@ -9,12 +9,13 @@ export class ActivityWatcher {
     takes in an  environment object, which has the following properties:
       printLogs -> (bool) will print to console.log when events occur
   */
-  constructor(environment) {
+  constructor(environment, options) {
     this.printers = [];
     this.watches = [];
     this.hooks = [];
     this.printQueue = [];
     this.env = environment || {};
+    this.options = options || {};
 
     this.log = function(log) {
       if (this.env.printLogs) {
@@ -53,7 +54,7 @@ export class ActivityWatcher {
 
       let setIntervalId = setInterval( () => {
         this.log(`Checking for Tickets from ${watch.name}`);
-        watch.getTicketObjects( this.printQueue );
+        watch.getTicketObjects( this.printQueue, this.options );
       }, watch._interval);
 
       /* add close function to watch to remove the watch interval */

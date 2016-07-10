@@ -3,6 +3,7 @@
   Watch trello ticket assignments for a given board
 */
 
+var TrelloTypes = require('../dist/ticket-printer').TrelloTypes;
 var Trello = require("trello");
 
 export const trelloWatch = {
@@ -10,8 +11,16 @@ export const trelloWatch = {
   numCards: undefined,
   counter: 1,
 
-  getTicketObjects: function( printQueue ) {
+  getTicketObjects: function( printQueue, options ) {
+    switch (options.type) {
+      case TrelloTypes.CARD_ADDED:
+        this._watchOnNewCardAddedToList(printQueue);
+		  default:
+			  this._watchOnNewCardAdded(printQueue);
+    }
+  },
 
+  _watchOnNewCardAdded: function(printQueue) {
     var trello = new Trello(this.trelloApiKey, this.trelloToken);
 
 		trello.getCardsOnBoard(this.boardId, function(error, trelloCards) {
@@ -38,6 +47,10 @@ export const trelloWatch = {
 			}
 		  this.numCards = numFreshCards;
 	  }.bind(this))
+  },
+
+  _watchOnNewCardAddedToList: function(printQueue) {
+    //TODO: Implement
   }
 };
 
