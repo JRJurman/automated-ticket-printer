@@ -8,8 +8,9 @@ var Trello = require("trello");
 export const trelloWatch = {
   name: 'Trello Watch',
   numCards: undefined,
+  counter: 1,
 
-  getTicketObjects: function() {
+  getTicketObjects: function( printQueue ) {
 
     var trello = new Trello(this.trelloApiKey, this.trelloToken);
 
@@ -24,17 +25,18 @@ export const trelloWatch = {
         numFreshCards++; 
       });
 
-			console.log('numcards:', this.numCards);
-			console.log('fresh:', numFreshCards);
-			
-			if(!this.numCards) {
-				this.numCards = numFreshCards;
+			if(this.numCards && numFreshCards > this.numCards) {
+				// list of tickets to return
+				printQueue.unshift({
+					watch: "Trello Watch",
+					title: "TRELLO-WATCH",
+					project: "Trello",
+					number: `#${this.counter}`,
+					body: `A new card has been added!`
+				});
+			  this.counter++;
 			}
-
-			else if(numFreshCards > this.numCards) {
-				//TODO: Establish actual criterion for printing
-				console.log('A new card has been added');
-			}
+		  this.numCards = numFreshCards;
 	  }.bind(this))
   }
 };
