@@ -1,5 +1,6 @@
-# distributable
+# distributables
 dist/*
+lib/*
 
 # compiled tests
 tests/*.js
