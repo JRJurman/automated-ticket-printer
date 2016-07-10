@@ -11,8 +11,10 @@ root directory to install all the dependencies.
 
 ## Building, Testing, and other Scripts
 This project contains several npm scripts to help build and test the project.  
-- `npm run build`: builds the project into `dist/ticket-printer.js`, happens
+- `npm run build:lib`: builds the project into `lib/ticket-printer.js`, happens
 after `npm install` by default.  
+- `npm run build`: does the above build, and prepares the library for testing,
+this should be the command when developing on the project.  
 - `npm test`: runs mocha tests on the project
 - `npm run test:ci`: runs mocha tests and returns a report to be read by
 circleci, happens after making a PR or new branch on github.
@@ -236,6 +238,7 @@ printer that prints github issues, or a text console that shows all the new
 Trello bugs for the day. The possibilities are endless!
 
 _New Watches, Printers, and Hooks should only introduce the minimum required
-dependencies. I realize in the future, including several Node APIs may get out
-of hand. When that happens, this project may go the way of babel (separate
-packages) however, that's something we'll tackle once we hit that bridge._
+dependencies, and these should be included as **optional dependencies**.
+I realize in the future, including several Node APIs may get out of hand. When
+that happens, this project may go the way of babel (separate packages) however,
+that's something we'll tackle once we hit that bridge._

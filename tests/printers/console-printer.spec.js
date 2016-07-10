@@ -1,4 +1,4 @@
-import { ActivityWatcher, consolePrinter } from '../dist/ticket-printer';
+import { ActivityWatcher, consolePrinter } from 'ticket-printer';
 import chai, { expect } from 'chai';
 import spies from 'chai-spies'
 
