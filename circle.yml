@@ -3,6 +3,7 @@ machine:
     version: 4.2.0
 test:
   override:
-    - npm run build && npm run test:ci
+    - npm run build
+    - npm run test:ci
   post:
     - mv test-results.xml $CIRCLE_TEST_REPORTS/test-results.xml
