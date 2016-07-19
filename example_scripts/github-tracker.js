@@ -3,35 +3,38 @@ var consolePrinter = require('ticket-printer').consolePrinter;
 var githubWatch = require('ticket-printer').githubWatch;
 
 // GITHUB SETUP
+var GithubApi = require('github');
+
 var apiOptions = {
   protocol: "https",
   host: "api.github.com",
   headers: {
-      "user-agent": "ticket-printer"
+    "user-agent": "ticket-printer"
   },
 };
+var github = new GithubApi(apiOptions);
 
-var auth = {
-  type: "basic",
-  username: 'your-username-here',
-  password: 'your-password-here'
-};
+// github authentication. Can be basic or a token. For more info, look at:
+// https://github.com/mikedeboer/node-github#authentication
+// required for looking at private repos, or doing more than 10 hits per minute
 
-var apiCallOptions = {
-  user: 'jrjurman',
-  repo: 'git-api-test',
-  // start of the day, it will then automatically update to only be new tickets
-  since: (new Date()).setHours(0,0,0,0)
-};
-
-// craft our very own watch
-var githubIssuesWatch = githubWatch(apiOptions, auth, 'issues', 'getForRepo', apiCallOptions);
+// var auth = {
+//   type: "basic",
+//   username: 'username',
+//   password: 'password'
+// };
+// github.authenticate(auth);
 
 // END GITHUB SETUP
+
+// make our watch with our query
+var query = 'is:open assignee:jrjurman';
+var startOfDay = (new Date()).setHours(0,0,0,0);
+var githubAssignments = githubWatch(github, query, startOfDay);
+
 
 // now setup our ticket printer
 var aw = new ActivityWatcher({printLogs:true});
 aw.addPrinter(consolePrinter);
-// once per minute (60000) is well under the rate limit of 5000
-aw.addWatch(githubIssuesWatch, 30000);
+aw.addWatch(githubAssignments, 10000); // 6 times per minute
 aw.start(1000);
