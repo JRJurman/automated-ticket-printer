@@ -211,14 +211,9 @@ look like, look at
 
 ### Issues
 If you want to help contribute, but don't know what needs to be worked on, check
-the issues tab on github. Anything on there that is not assigned is up-for-grabs
-. Issues with the
-[**help wanted**](https://github.com/JRJurman/ticket-printer/labels/help%20wanted)
-label are for comments and are encouraged to be picked up by other developers.
-Issues with the
-[**discussion**](https://github.com/JRJurman/ticket-printer/labels/discussion)
-label are for comments or feedback, usually on potential features or work items
-that aren't completely defined yet, or need some fleshing out.  
+the issues tab on github. Anything on there that isn't assigned is up-for-grabs.
+If it is unclear on what work needs to be done, feel free to make a comment on
+the issue asking for help.
 
 ### Pull Requests
 There are also Pull Requests with the
