@@ -5,6 +5,9 @@ var githubWatch = require('ticket-printer').githubWatch;
 // GITHUB SETUP
 var GithubApi = require('github');
 
+// github api options. Can point to github.com or an enterprise github instance.
+// For more options, look at:
+// https://github.com/mikedeboer/node-github#example
 var apiOptions = {
   protocol: "https",
   host: "api.github.com",
@@ -28,7 +31,7 @@ var github = new GithubApi(apiOptions);
 // END GITHUB SETUP
 
 // make our watch with our query
-var query = 'is:open assignee:jrjurman';
+var query = 'is:open assignee:username';
 var startOfDay = (new Date()).setHours(0,0,0,0);
 var githubAssignments = githubWatch(github, query, startOfDay);
 

@@ -50,9 +50,7 @@
     "localinstall": "^1.2.0",
     "lolex": "^1.5.0",
     "mocha": "^2.5.3",
-    "mocha-junit-reporter": "^1.11.1"
-  },
-  "optionalDependencies": {
+    "mocha-junit-reporter": "^1.11.1",
     "github": "^2.2.0"
   }
 }

@@ -36,7 +36,7 @@ export const githubWatch = function(github, query, startDate) {
             // iterate over each ticket, and if they were created after the last
             // check, then add it to the printQueue
             res.items.filter( function (ticket) {
-              return ((new Date(ticket.created_at)) > now);
+              return ((new Date(ticket.created_at)) >= now);
             }).forEach( function (ticket) {
               const project = ticket.url.split("/").slice(-4,-2).join("/");
               printQueue.unshift({
