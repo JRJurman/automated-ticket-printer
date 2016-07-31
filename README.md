@@ -31,7 +31,9 @@ use the bundled objects.
 This project uses a combination of `watches`, `hooks`, and `printers` to get
 and print tickets at either a time interval, or on triggered events.
 
-![Getting Github tickets and turning them into receipts](design/system-design.png)
+![Getting Github tickets and turning them into receipts](design/system-design.png)  
+To see an actual implementation of this example, look at the following project:  
+https://github.com/JRJurman/tessel-printer
 
 ### `ActivityWatcher`
 The `ActivityWatcher` is the server that collects `watches`, `hooks`, and
