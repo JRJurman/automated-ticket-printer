@@ -4,6 +4,10 @@ assigned. It is a library that exposes object standards and a server for making
 new ticket sources (github, jira, trello, etc...) and printers (console,
 receipt printer, web browser, etc...) easy to connect to each other.
 
+**This Project is no longer in development. If you wish to print tickets in a
+less modular way,  
+check out https://github.com/JRJurman/point-of-tickets**
+
 ## Installation
 This is a Node.js project, and requires npm and node to build the project. First
 clone or download the repository from github, and then run `npm install` in the
