@@ -1,11 +1,11 @@
-# Modular Ticket Printer
+# Automated Ticket Printer
 This project is an automated solution to print tickets and items as they get
 assigned. It is a library that exposes object standards and a server for making
 new ticket sources (github, jira, trello, etc...) and printers (console,
 receipt printer, web browser, etc...) easy to connect to each other.
 
 **This Project is no longer in development. If you wish to print tickets in a
-less modular way,  
+less automated way,  
 check out https://github.com/JRJurman/ticket-printer**
 
 ## Installation
