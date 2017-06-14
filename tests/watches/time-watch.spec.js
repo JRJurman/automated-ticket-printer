@@ -11,14 +11,14 @@ describe('TimeWatch', () => {
 
     it('should return a ticket with the current time', () => {
       const rightNow = (new Date()).toLocaleTimeString();
-      let printQueue = [];
+      const printQueue = [];
       timeWatch.getTicketObjects( printQueue );
       const ticket = printQueue[0];
       expect(ticket.body).to.equal(`The current time is ${rightNow}`)
     });
 
     it('should return a ticket with ticket properties', () => {
-      let printQueue = [];
+      const printQueue = [];
       timeWatch.getTicketObjects( printQueue );
       const ticket = printQueue[0];
       expect(ticket.watch).to.exist;

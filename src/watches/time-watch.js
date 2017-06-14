@@ -17,7 +17,7 @@ export const timeWatch = {
       watch: "Time Watch",
       title: "TIME-WATCH",
       project: "TIME",
-      number: `#${this.counter}`,
+      number: `${this.counter}`,
       body: `The current time is ${time}`
     });
 
